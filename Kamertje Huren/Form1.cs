@@ -250,6 +250,7 @@ namespace Kamertje_Huren
                 int playerPlayedScore = 0;
                 bool playerHasWon = false;
 
+                //checks if player has won!
                 foreach(int i in score)
                 {
                     if (i== playerTurn)
