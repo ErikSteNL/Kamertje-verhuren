@@ -265,13 +265,14 @@ namespace Kamertje_Huren
                     }
                 }
 
-
+                //displas message on second label when a player has won
                 if(playerPlayedScore > (((fieldSize - 1) * (fieldSize - 1) / 2)))
                 {
                     lbl2.Text = "Player " + playerTurn.ToString() + " WOOONNNNNN!!!!!";
                     playerHasWon = true;
                 }
 
+                //changes players turn when other player has player and he has not scored
                 if (playerPlayed && !playerHasScored)
                 {
                     
@@ -288,9 +289,11 @@ namespace Kamertje_Huren
                 }
             }
             
+            //refreshes screen with tht new drawings
             Refresh();
         }
 
+        //Knop voor nieuw spel
         private void btn1_Click(object sender, EventArgs e)
         {
             NewGame();
