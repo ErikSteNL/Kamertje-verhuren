@@ -68,6 +68,7 @@ namespace Kamertje_Huren
             
             playerTurn = 1;
             lbl1.Text = "Player 1";
+            lbl2.Text = "";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -183,6 +184,7 @@ namespace Kamertje_Huren
             x = e.X;
             y = e.Y;
             bool playerPlayed = false;
+            bool playerHasScored = false;
 
             //checks is player clicked on playable field (also the ones on which already have been played)
             if(x < 250 && x > 0 && y < 250 && y > 0)
@@ -202,6 +204,7 @@ namespace Kamertje_Huren
                         {
                             Console.WriteLine("Square is made under me");
                             score[x / 100, y / 100] = playerTurn;
+                            playerHasScored = true;
                         }
                     }
 
@@ -213,6 +216,7 @@ namespace Kamertje_Huren
                         {
                             Console.WriteLine("square is made above me");
                             score[x / 100, y / 100 - 1] = playerTurn;
+                            playerHasScored = true;
                         }
                     }
 
@@ -233,6 +237,7 @@ namespace Kamertje_Huren
                         {
                             Console.WriteLine("square on the left");
                             score[x / 100-1, y / 100] = playerTurn;
+                            playerHasScored = true;
                         }
                     }
                     //checks if not in left column
@@ -243,6 +248,7 @@ namespace Kamertje_Huren
                         {
                             Console.WriteLine("square on the right");
                             score[x / 100, y / 100] = playerTurn;
+                            playerHasScored = true;
                         }
                     }
                 }
@@ -259,13 +265,14 @@ namespace Kamertje_Huren
                     }
                 }
 
+
                 if(playerPlayedScore > (((fieldSize - 1) * (fieldSize - 1) / 2)))
                 {
-                    lbl1.Text = "Player " + playerTurn.ToString() + " WOOONNNNNN!!!!!";
+                    lbl2.Text = "Player " + playerTurn.ToString() + " WOOONNNNNN!!!!!";
                     playerHasWon = true;
                 }
 
-                if (playerPlayed && !playerHasWon)
+                if (playerPlayed && !playerHasScored)
                 {
                     
                     if (playerTurn == 1)
