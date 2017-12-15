@@ -24,13 +24,23 @@ namespace Kamertje_Huren
 
 
         
-        int[,] horzs = new int[2, 3]; //horizontal plays of both players
-        int[,] verts = new int[3, 2]; //vertical plays of both players
-        int[,] score = new int[2, 2]; //score of both players
+        int[,] horzs; //horizontal plays of both players
+        int[,] verts; //vertical plays of both players
+        int[,] score; //score of both players
 
         public Form1()
         {
             InitializeComponent();
+
+            comboBox1.Items.Add(3);
+            comboBox1.Items.Add(4);
+            comboBox1.Items.Add(5);
+            comboBox1.Items.Add(6);
+            comboBox1.Items.Add(7);
+            comboBox1.Items.Add(8);
+            comboBox1.Items.Add(9);
+
+            comboBox1.SelectedItem = 3;
         }
 
         /// <summary>
@@ -38,6 +48,16 @@ namespace Kamertje_Huren
         /// </summary>
         public void NewGame()
         {
+            panel1.Width = fieldSize * 100;
+            panel1.Height = fieldSize * 100;
+            Size s = new Size(fieldSize * 100, fieldSize * 100 +100);
+
+            Size = s;
+
+            horzs = new int[fieldSize-1, fieldSize];
+            verts = new int[fieldSize, fieldSize-1];
+            score = new int[fieldSize-1, fieldSize-1];
+
             //resets horizontal moves
             for (int i = 0; i < fieldSize - 1; i++)
             {
@@ -78,7 +98,7 @@ namespace Kamertje_Huren
         }
 
         /// <summary>
-        /// Paints all the elements on the panel, moves and scores
+        /// Paints all the elements on the panel: moves and scores
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -91,10 +111,10 @@ namespace Kamertje_Huren
             Rectangle rect = new Rectangle(0, 0, 50, 50); //rectangles for ellipses on the corners
             SolidBrush b = new SolidBrush(Color.Blue); //corner ellipses will be blue
 
-            //draws all the corners
-            for (int i = 0; i < 3; i++)
+            //draws all the circles
+            for (int i = 0; i < fieldSize; i++)
             {
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < fieldSize; j++)
                 {
                     rect.X = i * 100;
                     rect.Y = j * 100;
@@ -187,7 +207,7 @@ namespace Kamertje_Huren
             bool playerHasScored = false;
 
             //checks is player clicked on playable field (also the ones on which already have been played)
-            if(x < 250 && x > 0 && y < 250 && y > 0)
+            if(x < ((fieldSize * 100) - 50) && x > 0 && y < ((fieldSize * 100) - 50) && y > 0)
             {
                 //checks if horizontal move is made
                 if ((x / 50) % 2 == 1 && (y / 50) % 2 == 0 && horzs[x / 100, y / 100] == 0)
@@ -296,6 +316,7 @@ namespace Kamertje_Huren
         //Knop voor nieuw spel
         private void btn1_Click(object sender, EventArgs e)
         {
+            fieldSize = Convert.ToInt32(comboBox1.SelectedItem);
             NewGame();
             Refresh();
         }
