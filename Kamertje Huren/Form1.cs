@@ -50,9 +50,9 @@ namespace Kamertje_Huren
         {
             panel1.Width = fieldSize * 100;
             panel1.Height = fieldSize * 100;
-            Size s = new Size(fieldSize * 100, fieldSize * 100 +100);
+            
 
-            Size = s;
+            Size = new Size(fieldSize * 100, fieldSize * 100 + 100);
 
             horzs = new int[fieldSize-1, fieldSize];
             verts = new int[fieldSize, fieldSize-1];
